@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7FB9625F-A83E-4F46-A0B1-C67E1625843A</string>
+	<string>B68B6ACC-269A-495E-98CF-64D7652F515B</string>
 	<key>IDESourceControlProjectName</key>
 	<string>SANetworkTester</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6A218355-3716-44C7-8C1F-68C0A80BE704</key>
-		<string>https://github.com/shams-ahmed/SANetworkTester</string>
+		<key>B7F89725-630B-4C2E-8E7A-F24A2D93CF12</key>
+		<string>https://github.com/shams-ahmed/SANetworkTester.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Example/SANetworkTester.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6A218355-3716-44C7-8C1F-68C0A80BE704</key>
+		<key>B7F89725-630B-4C2E-8E7A-F24A2D93CF12</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/shams-ahmed/SANetworkTester</string>
+	<string>https://github.com/shams-ahmed/SANetworkTester.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6A218355-3716-44C7-8C1F-68C0A80BE704</string>
+	<string>B7F89725-630B-4C2E-8E7A-F24A2D93CF12</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6A218355-3716-44C7-8C1F-68C0A80BE704</string>
+			<string>B7F89725-630B-4C2E-8E7A-F24A2D93CF12</string>
 			<key>IDESourceControlWCCName</key>
 			<string>SANetworkTester</string>
 		</dict>

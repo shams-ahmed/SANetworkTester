@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D51EC5B118EB75470063AB2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51EC5B018EB75470063AB2F /* SystemConfiguration.framework */; };
+		D51EC5B418EB78DF0063AB2F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D51EC5B318EB78DF0063AB2F /* Reachability.m */; };
 		D5238F3B18EB01C1007E9A43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F3A18EB01C1007E9A43 /* Foundation.framework */; };
 		D5238F3F18EB01C1007E9A43 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F3E18EB01C1007E9A43 /* UIKit.framework */; };
 		D5238F4518EB01C1007E9A43 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5238F4318EB01C1007E9A43 /* InfoPlist.strings */; };
@@ -35,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D51EC5B018EB75470063AB2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D51EC5B218EB78DF0063AB2F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D51EC5B318EB78DF0063AB2F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		D5238F3718EB01C1007E9A43 /* SANetworkTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SANetworkTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5238F3A18EB01C1007E9A43 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D5238F3E18EB01C1007E9A43 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -63,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D51EC5B118EB75470063AB2F /* SystemConfiguration.framework in Frameworks */,
 				D5238F7318EB029C007E9A43 /* CFNetwork.framework in Frameworks */,
 				D5238F7118EB0295007E9A43 /* MobileCoreServices.framework in Frameworks */,
 				D5238F3F18EB01C1007E9A43 /* UIKit.framework in Frameworks */,
@@ -107,6 +113,7 @@
 		D5238F3918EB01C1007E9A43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D51EC5B018EB75470063AB2F /* SystemConfiguration.framework */,
 				D5238F7218EB029C007E9A43 /* CFNetwork.framework */,
 				D5238F7018EB0295007E9A43 /* MobileCoreServices.framework */,
 				D5238F3A18EB01C1007E9A43 /* Foundation.framework */,
@@ -162,6 +169,8 @@
 			children = (
 				D5238F7D18EB07EA007E9A43 /* SANetworkTester.h */,
 				D5238F7E18EB07EA007E9A43 /* SANetworkTester.m */,
+				D51EC5B218EB78DF0063AB2F /* Reachability.h */,
+				D51EC5B318EB78DF0063AB2F /* Reachability.m */,
 				D5238F7F18EB07EA007E9A43 /* SimplePing.h */,
 				D5238F8018EB07EA007E9A43 /* SimplePing.m */,
 			);
@@ -267,6 +276,7 @@
 				D5238F8118EB07EA007E9A43 /* SANetworkTester.m in Sources */,
 				D5238F4718EB01C1007E9A43 /* main.m in Sources */,
 				D5238F8218EB07EA007E9A43 /* SimplePing.m in Sources */,
+				D51EC5B418EB78DF0063AB2F /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

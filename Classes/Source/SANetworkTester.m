@@ -10,6 +10,8 @@
 
 static NSString *const SAGoogleDns = @"8.8.8.8";
 static NSString *const SAAppleAddess = @"www.apple.com";
+static NSInteger const SAAttemptLimit = 3;
+
 
 @interface SANetworkTester ()
 
@@ -29,6 +31,12 @@ static NSString *const SAAppleAddess = @"www.apple.com";
 @property (copy) void (^completionHandler)();
 @property (copy) void (^errorHandler)();
 
+
+- (void)sendPing;
+- (NSString *)shortErrorFromError:(NSError *)error;
+- (void)stopPingWithError:(NSError *)error;
+    
+    
 @end
 
 @implementation SANetworkTester
@@ -41,63 +49,65 @@ static NSString *const SAAppleAddess = @"www.apple.com";
     [self.sendTimer invalidate];
 }
 
-+ (id)initWithHost:(NSString *)hostName andDelegate:(id)delegate {
-    SANetworkTester *networkTester = [[SANetworkTester alloc] init];
-
-    networkTester.pinger = [SimplePing simplePingWithHostName:hostName];
-    networkTester.pinger.delegate = networkTester;
-    networkTester.networkTesterDelegate = delegate;
-    [networkTester.pinger start];
+- (id)init {
+    self = [super init];
+    if (self) {
+    }
     
-    do {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-    } while (networkTester.pinger);
+    return self;
+}
 
++ (id)initWithHost:(NSString *)hostName andDelegate:(id)delegate {
+    __block SANetworkTester *networkTester = [[SANetworkTester alloc] init];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        networkTester.pinger = [SimplePing simplePingWithHostName:hostName];
+        networkTester.pinger.delegate = networkTester;
+        networkTester.networkTesterDelegate = delegate;
+        [networkTester.pinger start];
+
+        do {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        } while (networkTester.pinger);
+        
+    });
+    
     return networkTester;
 }
 
 + (id)googleDnsWithDelegate:(id)delegate {
-    SANetworkTester *networkTester = [[SANetworkTester alloc] init];
-
-    networkTester.pinger = [SimplePing simplePingWithHostName:SAGoogleDns];
-    networkTester.pinger.delegate = networkTester;
-    networkTester.networkTesterDelegate = delegate;
-    [networkTester.pinger start];
-        
-    do {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-    } while (networkTester.pinger != nil);
-
-    return networkTester;
+    return [self initWithHost:SAGoogleDns andDelegate:delegate];
 }
 
 + (id)appleWithDelegate:(id)delegate {
-    SANetworkTester *networkTester = [[SANetworkTester alloc] init];
+    return [self initWithHost:SAAppleAddess andDelegate:delegate];
+}
+
++ (void)networkTestUsingBlockWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler address:(NSString *)address {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        SANetworkTester *networkTester = [[SANetworkTester alloc] init];
+        
+        networkTester.pinger = [SimplePing simplePingWithHostName:address];
+        networkTester.pinger.delegate = networkTester;
+        networkTester.completionHandler = completionHandler;
+        networkTester.errorHandler = errorHandler;
+        [networkTester.pinger start];
+        
+        do {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        } while (networkTester.pinger != nil);
+        
+    });
     
-    networkTester.pinger = [SimplePing simplePingWithHostName:SAAppleAddess];
-    networkTester.pinger.delegate = networkTester;
-    networkTester.networkTesterDelegate = delegate;
-    [networkTester.pinger start];
-    
-    do {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-    } while (networkTester.pinger != nil);
-    
-    return networkTester;
 }
 
 + (void)googleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler {
-    SANetworkTester *networkTester = [[SANetworkTester alloc] init];
+    [self networkTestUsingBlockWithCompletion:completionHandler errorHandler:errorHandler address:SAGoogleDns];
     
-    networkTester.pinger = [SimplePing simplePingWithHostName:SAGoogleDns];
-    networkTester.pinger.delegate = networkTester;
-    networkTester.completionHandler = completionHandler;
-    networkTester.errorHandler = errorHandler;
-    [networkTester.pinger start];
-    
-    do {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-    } while (networkTester.pinger != nil);
+}
+
++ (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler {
+    [self networkTestUsingBlockWithCompletion:completionHandler errorHandler:errorHandler address:SAAppleAddess];
     
 }
 
@@ -145,23 +155,34 @@ static NSString *const SAAppleAddess = @"www.apple.com";
 }
 
 - (void)stopPingWithError:(NSError *)error {
-    if (error) {
+    __block NSError *aError = error;
+    __block NSString *hostAddress = self.pinger.hostName;
+    
+    if (aError) {
         if ([self.networkTesterDelegate respondsToSelector:@selector(didFailToReceiveResponseFromAddress:withError:)]) {
-            [self.networkTesterDelegate performSelector:@selector(didFailToReceiveResponseFromAddress:withError:)
-                                          withObject:self.pinger.hostName
-                                          withObject:error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.networkTesterDelegate performSelector:@selector(didFailToReceiveResponseFromAddress:withError:)
+                                              withObject:hostAddress
+                                              withObject:error];
+                
+            });
+            
         } else if (self.completionHandler) {
-            self.errorHandler(self.pinger.hostName, error);
+            self.errorHandler(hostAddress, error);
+            
         }
 
     } else {
-        NSNumber *responses = [NSNumber numberWithInteger:_attempts];
+        __block NSNumber *responses = [NSNumber numberWithInteger:_attempts];
         
         if ([self.networkTesterDelegate respondsToSelector:@selector(didReceiveResponse:)]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.networkTesterDelegate performSelector:@selector(didReceiveResponse:) withObject:responses];
+            });
 
-            [self.networkTesterDelegate performSelector:@selector(didReceiveResponse:) withObject:responses];
         } else if (self.completionHandler) {
             self.completionHandler(responses);
+            
         }
     }
 
@@ -173,8 +194,8 @@ static NSString *const SAAppleAddess = @"www.apple.com";
 
 #pragma mark - SinglePingDelegate
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address {
-    [self sendPing]; // ???
-    self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+    [self sendPing];
+    self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.75
                                                       target:self
                                                     selector:@selector(sendPing)
                                                     userInfo:nil
@@ -183,21 +204,16 @@ static NSString *const SAAppleAddess = @"www.apple.com";
 }
 
 - (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet {
-    if (_attempts < 3) {
-//        testintg only
-//        NSLog(@"#%u ping sent", (unsigned int) OSSwapBigToHostInt16(((const ICMPHeader *) packet.bytes)->sequenceNumber));
+    if (_attempts < SAAttemptLimit) {
         _attempts++;
-    } else {
-        [self stopPingWithError:nil];
     }
 
 }
 
 - (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet {
-//    testng only
 //    NSLog(@"#%u ping received", (unsigned int) OSSwapBigToHostInt16([SimplePing icmpInPacket:packet]->sequenceNumber));
     
-    if (_response == 3) {
+    if (_response == SAAttemptLimit) {
         [self stopPingWithError:nil];
         return;
     }

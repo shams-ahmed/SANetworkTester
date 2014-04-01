@@ -13,21 +13,15 @@
 #pragma mark
 #pragma mark - AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window makeKeyAndVisible];
-    
-    
-    /** NETWORK TEST
-     *  Two routes to check ping either using Blocks or Delegate
-     */
+    /* NETWORK TEST - Two routes to check ping either using Blocks or Delegate */
 
     /**
-     *  Ping with delegate
+     *  1. Ping with Delegate
      */
-//    [SAPingHelper googleDnsWithDelegate:self];
+//    [SANetworkTester googleDnsWithDelegate:self];
     
     /**
-     *  Ping with Block
+     *  2. Ping with Block
      */
     [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
         // handle success
@@ -36,8 +30,9 @@
     } errorHandler:^(NSString *address, NSError *error) {
         // handle error
         [self showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
-        
+
     }];
+    
     
     return YES;
 }
@@ -55,7 +50,7 @@
 }
 
 
-#pragma mark - Helper method for demo only
+#pragma mark - Helper method for demo purpose
 - (void)showAlert:(NSString *)message {
     [[[UIAlertView alloc] initWithTitle:@"SANetworkTester"
                                 message:message
