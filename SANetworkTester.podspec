@@ -9,9 +9,8 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "shams-ahmed" => "Shams Ahmed" }
   s.source           = { :git => "https://github.com/shams-ahmed/SANetworkTester.git", :tag => s.version.to_s }
-  s.platform     = :ios, '6.0'
-  s.requires_arc = true
-
-  s.source_files = 'Classes'
+  s.platform         = :ios, '6.0'
+  s.requires_arc     = true
+  s.source_files = 'Classes/Source'
   s.frameworks = 'CFNetwork', 'MobileCoreServices'
 end
