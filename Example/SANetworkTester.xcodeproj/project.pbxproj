@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D5238F3B18EB01C1007E9A43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F3A18EB01C1007E9A43 /* Foundation.framework */; };
+		D5238F3F18EB01C1007E9A43 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F3E18EB01C1007E9A43 /* UIKit.framework */; };
+		D5238F4518EB01C1007E9A43 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5238F4318EB01C1007E9A43 /* InfoPlist.strings */; };
+		D5238F4718EB01C1007E9A43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D5238F4618EB01C1007E9A43 /* main.m */; };
+		D5238F4B18EB01C1007E9A43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5238F4A18EB01C1007E9A43 /* AppDelegate.m */; };
+		D5238F4D18EB01C1007E9A43 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5238F4C18EB01C1007E9A43 /* Images.xcassets */; };
+		D5238F5418EB01C1007E9A43 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F5318EB01C1007E9A43 /* XCTest.framework */; };
+		D5238F5518EB01C1007E9A43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F3A18EB01C1007E9A43 /* Foundation.framework */; };
+		D5238F5618EB01C1007E9A43 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F3E18EB01C1007E9A43 /* UIKit.framework */; };
+		D5238F5E18EB01C1007E9A43 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5238F5C18EB01C1007E9A43 /* InfoPlist.strings */; };
+		D5238F6018EB01C1007E9A43 /* SANetworkTesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5238F5F18EB01C1007E9A43 /* SANetworkTesterTests.m */; };
+		D5238F7118EB0295007E9A43 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F7018EB0295007E9A43 /* MobileCoreServices.framework */; };
+		D5238F7318EB029C007E9A43 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5238F7218EB029C007E9A43 /* CFNetwork.framework */; };
+		D5238F8118EB07EA007E9A43 /* SANetworkTester.m in Sources */ = {isa = PBXBuildFile; fileRef = D5238F7E18EB07EA007E9A43 /* SANetworkTester.m */; };
+		D5238F8218EB07EA007E9A43 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = D5238F8018EB07EA007E9A43 /* SimplePing.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D5238F5718EB01C1007E9A43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5238F2F18EB01C1007E9A43 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5238F3618EB01C1007E9A43;
+			remoteInfo = SANetworkTester;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D5238F3718EB01C1007E9A43 /* SANetworkTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SANetworkTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5238F3A18EB01C1007E9A43 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D5238F3E18EB01C1007E9A43 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D5238F4218EB01C1007E9A43 /* SANetworkTester-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SANetworkTester-Info.plist"; sourceTree = "<group>"; };
+		D5238F4418EB01C1007E9A43 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D5238F4618EB01C1007E9A43 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D5238F4818EB01C1007E9A43 /* SANetworkTester-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SANetworkTester-Prefix.pch"; sourceTree = "<group>"; };
+		D5238F4918EB01C1007E9A43 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SANetworkTester/AppDelegate.h; sourceTree = "<group>"; };
+		D5238F4A18EB01C1007E9A43 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SANetworkTester/AppDelegate.m; sourceTree = "<group>"; };
+		D5238F4C18EB01C1007E9A43 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D5238F5218EB01C1007E9A43 /* SANetworkTesterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SANetworkTesterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5238F5318EB01C1007E9A43 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D5238F5B18EB01C1007E9A43 /* SANetworkTesterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SANetworkTesterTests-Info.plist"; sourceTree = "<group>"; };
+		D5238F5D18EB01C1007E9A43 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D5238F5F18EB01C1007E9A43 /* SANetworkTesterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SANetworkTesterTests.m; sourceTree = "<group>"; };
+		D5238F7018EB0295007E9A43 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D5238F7218EB029C007E9A43 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D5238F7D18EB07EA007E9A43 /* SANetworkTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SANetworkTester.h; sourceTree = "<group>"; };
+		D5238F7E18EB07EA007E9A43 /* SANetworkTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SANetworkTester.m; sourceTree = "<group>"; };
+		D5238F7F18EB07EA007E9A43 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		D5238F8018EB07EA007E9A43 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5238F3418EB01C1007E9A43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5238F7318EB029C007E9A43 /* CFNetwork.framework in Frameworks */,
+				D5238F7118EB0295007E9A43 /* MobileCoreServices.framework in Frameworks */,
+				D5238F3F18EB01C1007E9A43 /* UIKit.framework in Frameworks */,
+				D5238F3B18EB01C1007E9A43 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5238F4F18EB01C1007E9A43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5238F5418EB01C1007E9A43 /* XCTest.framework in Frameworks */,
+				D5238F5618EB01C1007E9A43 /* UIKit.framework in Frameworks */,
+				D5238F5518EB01C1007E9A43 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D5238F2E18EB01C1007E9A43 = {
+			isa = PBXGroup;
+			children = (
+				D5238F7B18EB07EA007E9A43 /* Classes */,
+				D5238F4918EB01C1007E9A43 /* AppDelegate.h */,
+				D5238F4A18EB01C1007E9A43 /* AppDelegate.m */,
+				D5238F4118EB01C1007E9A43 /* Supporting Files */,
+				D5238F3918EB01C1007E9A43 /* Frameworks */,
+				D5238F3818EB01C1007E9A43 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D5238F3818EB01C1007E9A43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F3718EB01C1007E9A43 /* SANetworkTester.app */,
+				D5238F5218EB01C1007E9A43 /* SANetworkTesterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5238F3918EB01C1007E9A43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F7218EB029C007E9A43 /* CFNetwork.framework */,
+				D5238F7018EB0295007E9A43 /* MobileCoreServices.framework */,
+				D5238F3A18EB01C1007E9A43 /* Foundation.framework */,
+				D5238F3E18EB01C1007E9A43 /* UIKit.framework */,
+				D5238F5318EB01C1007E9A43 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5238F4118EB01C1007E9A43 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F4C18EB01C1007E9A43 /* Images.xcassets */,
+				D5238F5918EB01C1007E9A43 /* SANetworkTesterTests */,
+				D5238F4218EB01C1007E9A43 /* SANetworkTester-Info.plist */,
+				D5238F4318EB01C1007E9A43 /* InfoPlist.strings */,
+				D5238F4618EB01C1007E9A43 /* main.m */,
+				D5238F4818EB01C1007E9A43 /* SANetworkTester-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			path = SANetworkTester;
+			sourceTree = "<group>";
+		};
+		D5238F5918EB01C1007E9A43 /* SANetworkTesterTests */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F5F18EB01C1007E9A43 /* SANetworkTesterTests.m */,
+				D5238F5A18EB01C1007E9A43 /* Supporting Files */,
+			);
+			path = SANetworkTesterTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		D5238F5A18EB01C1007E9A43 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F5B18EB01C1007E9A43 /* SANetworkTesterTests-Info.plist */,
+				D5238F5C18EB01C1007E9A43 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D5238F7B18EB07EA007E9A43 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F7C18EB07EA007E9A43 /* Source */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		D5238F7C18EB07EA007E9A43 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D5238F7D18EB07EA007E9A43 /* SANetworkTester.h */,
+				D5238F7E18EB07EA007E9A43 /* SANetworkTester.m */,
+				D5238F7F18EB07EA007E9A43 /* SimplePing.h */,
+				D5238F8018EB07EA007E9A43 /* SimplePing.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D5238F3618EB01C1007E9A43 /* SANetworkTester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5238F6318EB01C1007E9A43 /* Build configuration list for PBXNativeTarget "SANetworkTester" */;
+			buildPhases = (
+				D5238F3318EB01C1007E9A43 /* Sources */,
+				D5238F3418EB01C1007E9A43 /* Frameworks */,
+				D5238F3518EB01C1007E9A43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SANetworkTester;
+			productName = SANetworkTester;
+			productReference = D5238F3718EB01C1007E9A43 /* SANetworkTester.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5238F5118EB01C1007E9A43 /* SANetworkTesterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5238F6618EB01C1007E9A43 /* Build configuration list for PBXNativeTarget "SANetworkTesterTests" */;
+			buildPhases = (
+				D5238F4E18EB01C1007E9A43 /* Sources */,
+				D5238F4F18EB01C1007E9A43 /* Frameworks */,
+				D5238F5018EB01C1007E9A43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5238F5818EB01C1007E9A43 /* PBXTargetDependency */,
+			);
+			name = SANetworkTesterTests;
+			productName = SANetworkTesterTests;
+			productReference = D5238F5218EB01C1007E9A43 /* SANetworkTesterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D5238F2F18EB01C1007E9A43 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = SA;
+				TargetAttributes = {
+					D5238F5118EB01C1007E9A43 = {
+						TestTargetID = D5238F3618EB01C1007E9A43;
+					};
+				};
+			};
+			buildConfigurationList = D5238F3218EB01C1007E9A43 /* Build configuration list for PBXProject "SANetworkTester" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D5238F2E18EB01C1007E9A43;
+			productRefGroup = D5238F3818EB01C1007E9A43 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5238F3618EB01C1007E9A43 /* SANetworkTester */,
+				D5238F5118EB01C1007E9A43 /* SANetworkTesterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5238F3518EB01C1007E9A43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5238F4518EB01C1007E9A43 /* InfoPlist.strings in Resources */,
+				D5238F4D18EB01C1007E9A43 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5238F5018EB01C1007E9A43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5238F5E18EB01C1007E9A43 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D5238F3318EB01C1007E9A43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5238F4B18EB01C1007E9A43 /* AppDelegate.m in Sources */,
+				D5238F8118EB07EA007E9A43 /* SANetworkTester.m in Sources */,
+				D5238F4718EB01C1007E9A43 /* main.m in Sources */,
+				D5238F8218EB07EA007E9A43 /* SimplePing.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5238F4E18EB01C1007E9A43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5238F6018EB01C1007E9A43 /* SANetworkTesterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D5238F5818EB01C1007E9A43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5238F3618EB01C1007E9A43 /* SANetworkTester */;
+			targetProxy = D5238F5718EB01C1007E9A43 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D5238F4318EB01C1007E9A43 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5238F4418EB01C1007E9A43 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D5238F5C18EB01C1007E9A43 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5238F5D18EB01C1007E9A43 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D5238F6118EB01C1007E9A43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D5238F6218EB01C1007E9A43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D5238F6418EB01C1007E9A43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SANetworkTester/SANetworkTester-Prefix.pch";
+				INFOPLIST_FILE = "SANetworkTester/SANetworkTester-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D5238F6518EB01C1007E9A43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SANetworkTester/SANetworkTester-Prefix.pch";
+				INFOPLIST_FILE = "SANetworkTester/SANetworkTester-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D5238F6718EB01C1007E9A43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SANetworkTester.app/SANetworkTester";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SANetworkTester/SANetworkTester-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SANetworkTesterTests/SANetworkTesterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D5238F6818EB01C1007E9A43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SANetworkTester.app/SANetworkTester";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SANetworkTester/SANetworkTester-Prefix.pch";
+				INFOPLIST_FILE = "SANetworkTesterTests/SANetworkTesterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D5238F3218EB01C1007E9A43 /* Build configuration list for PBXProject "SANetworkTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5238F6118EB01C1007E9A43 /* Debug */,
+				D5238F6218EB01C1007E9A43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5238F6318EB01C1007E9A43 /* Build configuration list for PBXNativeTarget "SANetworkTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5238F6418EB01C1007E9A43 /* Debug */,
+				D5238F6518EB01C1007E9A43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5238F6618EB01C1007E9A43 /* Build configuration list for PBXNativeTarget "SANetworkTesterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5238F6718EB01C1007E9A43 /* Debug */,
+				D5238F6818EB01C1007E9A43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D5238F2F18EB01C1007E9A43 /* Project object */;
+}
