@@ -25,7 +25,7 @@ Example method with Delegate:
 5. add method to run test: [SANetworkTester googleDnsWithDelegate:self];
 
 ## Screenshot
-<img src="https://raw.github.com/shams-ahmed/SANetworkTester/Resources/Screenshot.png">
+<img src="https://raw.githubusercontent.com/shams-ahmed/SANetworkTester/master/Resources/Screenshot.png">
 
 ## Usage
 
