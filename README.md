@@ -6,6 +6,7 @@
 SANetworkHelper makes your life easier to test network connection on a iOS device without having to spend time writing lots of code. Its has a few simple class methods that run in a background thread and return the reponse of the network by either using Block or Delegate.
 
 Example method with Block:
+
     [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
         // handle success
         [self showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
