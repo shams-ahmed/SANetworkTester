@@ -28,14 +28,33 @@ typedef void (^SACompletionHandler)(NSNumber *response);
  */
 typedef void (^SAErrorHandler)(NSString *address, NSError *error);
 
+/**
+ *  current status of network
+ */
+typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
+    /**
+     *  no available network such as wifi or data
+     */
+    SANotReachable = 0,
+    /**
+     *  wifi available but does that state if device can connect to a host
+     */
+    SAReachableViaWiFi,
+    /**
+     *  same as wifi but needs addional actions on user side VPN, Proxy etc..
+     */
+    SAReachableViaWWAN
+};
+
 
 /**
- *  Protocol for response or fail of network
+ *  Protocol for response/fail of network ping test
  */
 @protocol SANetworkTesterDelegate <NSObject>
 
 - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error;
 - (void)didReceiveResponse:(NSNumber *)response;
+
 
 @end
 
@@ -81,7 +100,6 @@ typedef void (^SAErrorHandler)(NSString *address, NSError *error);
  */
 + (id)appleWithDelegate:(id)delegate;
 
-
 /**
  *  use own address to ping a network
  *
@@ -99,7 +117,6 @@ typedef void (^SAErrorHandler)(NSString *address, NSError *error);
  */
 + (void)googleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler;
 
-
 /**
  *  checks apple dns using block
  *
@@ -107,6 +124,13 @@ typedef void (^SAErrorHandler)(NSString *address, NSError *error);
  *  @param errorHandler      failed block to be executed
  */
 + (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler;
+
+/**
+ *  Check device for action network connection such as Wifi and Data.
+ *
+ *  @return current status
+ */
++ (SACurrentNetworkStatus)networkStatus;
 
 
 @end

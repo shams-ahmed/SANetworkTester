@@ -127,11 +127,11 @@
 			isa = PBXGroup;
 			children = (
 				D5238F4C18EB01C1007E9A43 /* Images.xcassets */,
-				D5238F5918EB01C1007E9A43 /* SANetworkTesterTests */,
 				D5238F4218EB01C1007E9A43 /* SANetworkTester-Info.plist */,
 				D5238F4318EB01C1007E9A43 /* InfoPlist.strings */,
 				D5238F4618EB01C1007E9A43 /* main.m */,
 				D5238F4818EB01C1007E9A43 /* SANetworkTester-Prefix.pch */,
+				D5238F5918EB01C1007E9A43 /* SANetworkTesterTests */,
 			);
 			name = "Supporting Files";
 			path = SANetworkTester;

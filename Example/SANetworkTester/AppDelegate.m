@@ -13,16 +13,30 @@
 #pragma mark
 #pragma mark - AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    /* NETWORK TEST - Two routes to check ping either using Blocks or Delegate */
 
-    /**
-     *  1. Ping with Delegate
-     */
-//    [SANetworkTester googleDnsWithDelegate:self];
+    /* 1. Active Network test - i.e wifi or data */
+    /*
+    switch ([SANetworkTester networkStatus]) {
+        case SANotReachable:
+            [self showAlert:@"Network is not reachable via WIFI, DATA or WWAN"];
+            break;
+        case SAReachableViaWiFi:
+            [self showAlert:@"Network is reachable via WIFI"];
+            break;
+        case SAReachableViaWWAN:
+            [self showAlert:@"Network is reachable via WWAN"];
+            break;
+        default:
+            break;
+    }
+    */
     
-    /**
-     *  2. Ping with Block
-     */
+    
+    /* 2. Ping test with Delegate */
+    // [SANetworkTester googleDnsWithDelegate:self];
+    
+    
+    /* 3. Ping test with Block */
     [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
         // handle success
         [self showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
@@ -32,7 +46,6 @@
         [self showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
 
     }];
-    
     
     return YES;
 }

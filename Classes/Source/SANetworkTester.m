@@ -43,10 +43,11 @@ static NSInteger const SAAttemptLimit = 3;
 
 
 #pragma mark -
-#pragma mark - class method
+#pragma mark - Class Method
 - (void)dealloc {
     [self.pinger stop];
     [self.sendTimer invalidate];
+    
 }
 
 - (id)init {
@@ -77,10 +78,12 @@ static NSInteger const SAAttemptLimit = 3;
 
 + (id)googleDnsWithDelegate:(id)delegate {
     return [self initWithHost:SAGoogleDns andDelegate:delegate];
+    
 }
 
 + (id)appleWithDelegate:(id)delegate {
     return [self initWithHost:SAAppleAddess andDelegate:delegate];
+    
 }
 
 + (void)networkTestUsingBlockWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler address:(NSString *)address {
@@ -111,8 +114,26 @@ static NSInteger const SAAttemptLimit = 3;
     
 }
 
++ (SACurrentNetworkStatus)networkStatus {
+    switch ([Reachability reachabilityForInternetConnection].currentReachabilityStatus) {
+        case 0: // NotReachable
+            return SANotReachable;
+            break;
+        case 1: // ReachableViaWiFi
+            return SAReachableViaWiFi;
+            break;
+        case 2: // ReachableViaWWAN
+            return SAReachableViaWWAN;
+            break;
+        default:
+            return SANotReachable;
+            break;
+    }
+    
+}
 
-#pragma mark - object method
+
+#pragma mark - Object Method
 - (NSString *)shortErrorFromError:(NSError *)error {
     NSString *result;
     NSNumber *failureNum;
