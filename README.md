@@ -3,7 +3,7 @@
 [![Version](http://cocoapod-badges.herokuapp.com/v/SANetworkTester/badge.png)](http://cocoadocs.org/docsets/SANetworkTester)
 [![Platform](http://cocoapod-badges.herokuapp.com/p/SANetworkTester/badge.png)](http://cocoadocs.org/docsets/SANetworkTester)
 
-SANetworkHelper makes your life easier to test network connection on a iOS device without having to spend time writing lots of code. Its has a few simple class methods that run in a background thread and return the reponse of the network by either using Block or Delegate.
+SANetworkHelper makes your life easier to test network connection on a iOS device without having to spend time writing lots of code. Its has a few simple class methods that run in a background thread and return the response of the network by either using Block or Delegate.
 
 Example method with Block:
 
@@ -24,6 +24,8 @@ Example method with Delegate:
 3. add two optional protocol methods: - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error; and - (void)didReceiveResponse:(NSNumber *)response;
 5. add method to run test: [SANetworkTester googleDnsWithDelegate:self];
 
+## Screenshot
+<img src="https://raw.github.com/shams-ahmed/SANetworkTester/Resources/Screenshot.png">
 
 ## Usage
 
