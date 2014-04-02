@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SANetworkTester"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "Quick and Easy way to check for active network connection using Blocks or Delegate on iOS devices"
   s.description      = <<-DESC
                       Test network connection using ping test such as Google DNS, Apple or any IP Address. Built on top of key Apple frameworks, Support ARC and iOS 6 and 7.
