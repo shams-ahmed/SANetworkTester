@@ -19,7 +19,7 @@ Example method with Block:
 
 Example method with Delegate:
 
-1. #import <SANetworkTester.h>
+1. #import < SANetworkTester.h >
 2. add Delegate to class: <SANetworkTesterDelegate>
 3. add two optional protocol methods: - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error; and - (void)didReceiveResponse:(NSNumber *)response;
 5. add method to run test: [SANetworkTester googleDnsWithDelegate:self];
