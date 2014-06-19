@@ -57,7 +57,7 @@
     
 }
 
-- (void)didReceiveResponse:(NSNumber *)response {
+- (void)didReceiveNetworkResponse:(NSNumber *)response {
     [self showAlert:[NSString stringWithFormat:@"received %@ packets", response]];
     
 }

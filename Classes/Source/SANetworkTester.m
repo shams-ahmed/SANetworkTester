@@ -196,9 +196,9 @@ static NSInteger const SAAttemptLimit = 3;
     } else {
         __block NSNumber *responses = [NSNumber numberWithInteger:_attempts];
         
-        if ([self.networkTesterDelegate respondsToSelector:@selector(didReceiveResponse:)]) {
+        if ([self.networkTesterDelegate respondsToSelector:@selector(didReceiveNetworkResponse:)]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.networkTesterDelegate performSelector:@selector(didReceiveResponse:) withObject:responses];
+                [self.networkTesterDelegate performSelector:@selector(didReceiveNetworkResponse:) withObject:responses];
             });
 
         } else if (self.completionHandler) {

@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 @protocol SANetworkTesterDelegate <NSObject>
 
 - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error;
-- (void)didReceiveResponse:(NSNumber *)response;
+- (void)didReceiveNetworkResponse:(NSNumber *)response;
 
 
 @end
