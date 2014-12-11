@@ -7,13 +7,17 @@
 //
 
 #import "SANetworkTester.h"
+#import "SimplePing.h"
+#import "Reachability.h"
+#include <sys/socket.h>
+#include <netdb.h>
 
 static NSString *const SAGoogleDns = @"8.8.8.8";
 static NSString *const SAAppleAddess = @"www.apple.com";
 static NSInteger const SAAttemptLimit = 3;
 
 
-@interface SANetworkTester ()
+@interface SANetworkTester () <SimplePingDelegate>
 
 /**
  *  does all actions fro mapple example
@@ -52,7 +56,9 @@ static NSInteger const SAAttemptLimit = 3;
 
 - (id)init {
     self = [super init];
+    
     if (self) {
+        
     }
     
     return self;
@@ -68,7 +74,9 @@ static NSInteger const SAAttemptLimit = 3;
         [networkTester.pinger start];
 
         do {
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                     beforeDate:[NSDate distantFuture]];
+            
         } while (networkTester.pinger);
         
     });
@@ -97,7 +105,9 @@ static NSInteger const SAAttemptLimit = 3;
         [networkTester.pinger start];
         
         do {
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                     beforeDate:[NSDate distantFuture]];
+            
         } while (networkTester.pinger != nil);
         
     });
@@ -105,12 +115,16 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 + (void)googleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler {
-    [self networkTestUsingBlockWithCompletion:completionHandler errorHandler:errorHandler address:SAGoogleDns];
+    [self networkTestUsingBlockWithCompletion:completionHandler
+                                 errorHandler:errorHandler
+                                      address:SAGoogleDns];
     
 }
 
 + (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler {
-    [self networkTestUsingBlockWithCompletion:completionHandler errorHandler:errorHandler address:SAAppleAddess];
+    [self networkTestUsingBlockWithCompletion:completionHandler
+                                 errorHandler:errorHandler
+                                      address:SAAppleAddess];
     
 }
 
@@ -150,6 +164,7 @@ static NSInteger const SAAttemptLimit = 3;
             failureStr = gai_strerror(failure);
             if (failureStr != NULL) {
                 result = [NSString stringWithUTF8String:failureStr];
+                
             }
         }
     }
@@ -198,24 +213,35 @@ static NSInteger const SAAttemptLimit = 3;
         
         if ([self.networkTesterDelegate respondsToSelector:@selector(didReceiveNetworkResponse:)]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.networkTesterDelegate performSelector:@selector(didReceiveNetworkResponse:) withObject:responses];
+                [self.networkTesterDelegate performSelector:@selector(didReceiveNetworkResponse:)
+                                                 withObject:responses];
+                
             });
 
         } else if (self.completionHandler) {
             self.completionHandler(responses);
             
         }
+        
     }
-
+    
+    /**
+     *  dealloc all objects and kill timer
+     */
     [self.sendTimer invalidate];
     self.sendTimer = nil;
     self.pinger = nil;
+    
 }
 
 
 #pragma mark - SinglePingDelegate
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address {
     [self sendPing];
+    
+    /**
+     *  start timer to make addional request
+     */
     self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.75
                                                       target:self
                                                     selector:@selector(sendPing)
@@ -225,17 +251,26 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 - (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet {
-    if (_attempts < SAAttemptLimit) {
+    if (_attempts == SAAttemptLimit) {
+        _response > 0 ? [self stopPingWithError:nil] : [self stopPingWithError:[NSError errorWithDomain:@"ReceiveUnexpectedPacket"
+                                                                                                   code:1000
+                                                                                               userInfo:nil]];
+        
+        return;
+    } else if (_attempts < SAAttemptLimit) {
         _attempts++;
+
     }
 
 }
 
 - (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet {
-//    NSLog(@"#%u ping received", (unsigned int) OSSwapBigToHostInt16([SimplePing icmpInPacket:packet]->sequenceNumber));
-    
+    /**
+     *  if response and limit match then pass test
+     */
     if (_response == SAAttemptLimit) {
         [self stopPingWithError:nil];
+        
         return;
     }
     
@@ -253,7 +288,9 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 - (void)simplePing:(SimplePing *)pinger didReceiveUnexpectedPacket:(NSData *)packet {
-    [self stopPingWithError:[NSError errorWithDomain:@"ReceiveUnexpectedPacket" code:1000 userInfo:nil]];
+    [self stopPingWithError:[NSError errorWithDomain:@"ReceiveUnexpectedPacket"
+                                                code:1000
+                                            userInfo:nil]];
     
 }
 

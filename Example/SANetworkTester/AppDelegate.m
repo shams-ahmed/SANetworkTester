@@ -32,11 +32,11 @@
     */
     
     
-    /* 2. Ping test with Delegate */
+    /* 2. Ping test with Delegate approach*/
     // [SANetworkTester googleDnsWithDelegate:self];
     
     
-    /* 3. Ping test with Block */
+    /* 3. Ping test with Block approach*/
     [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
         // handle success
         [self showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
@@ -63,7 +63,7 @@
 }
 
 
-#pragma mark - Helper method for demo purpose
+#pragma mark - Helper method for demo purpose only
 - (void)showAlert:(NSString *)message {
     [[[UIAlertView alloc] initWithTitle:@"SANetworkTester"
                                 message:message

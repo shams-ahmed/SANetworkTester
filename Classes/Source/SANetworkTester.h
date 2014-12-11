@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SimplePing.h"
-#import "Reachability.h"
-#include <sys/socket.h>
-#include <netdb.h>
+
+
 
 
 /**
@@ -52,31 +50,44 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  */
 @protocol SANetworkTesterDelegate <NSObject>
 
+/**
+ *  unsuccessfully ping test
+ *
+ *  @param address network address
+ *  @param error   network error message
+ */
 - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error;
+
+/**
+ *  successfully network
+ *
+ *  @param response number of ping passed
+ */
 - (void)didReceiveNetworkResponse:(NSNumber *)response;
 
 
 @end
 
 
-@interface SANetworkTester : NSObject <SimplePingDelegate>
+@interface SANetworkTester : NSObject
 
 /**
- *  Delegate for SinglePing
+ *  SANetworkTesterDelegate
  */
 @property (nonatomic, weak) id<SANetworkTesterDelegate> networkTesterDelegate;
 
 /**
- *  number of attempts
+ *  number of attempts to try
  */
 @property (nonatomic) NSInteger attempts;
 
 /**
- *  number of successful responses
+ *  number of successful responses made
  */
 @property (nonatomic) NSInteger response;
 
 
+#pragma mark - SANetworkTester with Delegate
 /**
  *  checks for dns responses with supplied address
  *
@@ -100,6 +111,8 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  */
 + (id)appleWithDelegate:(id)delegate;
 
+
+#pragma mark - SANetworkTester with Block
 /**
  *  use own address to ping a network
  *
@@ -125,6 +138,8 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  */
 + (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler;
 
+
+#pragma mark - SANetworkTester network information
 /**
  *  Check device for action network connection such as Wifi and Data.
  *
