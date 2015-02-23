@@ -96,6 +96,7 @@
 				D5238F4918EB01C1007E9A43 /* AppDelegate.h */,
 				D5238F4A18EB01C1007E9A43 /* AppDelegate.m */,
 				D5238F4118EB01C1007E9A43 /* Supporting Files */,
+				D5238F5918EB01C1007E9A43 /* SANetworkTesterTests */,
 				D5238F3918EB01C1007E9A43 /* Frameworks */,
 				D5238F3818EB01C1007E9A43 /* Products */,
 			);
@@ -131,7 +132,6 @@
 				D5238F4318EB01C1007E9A43 /* InfoPlist.strings */,
 				D5238F4618EB01C1007E9A43 /* main.m */,
 				D5238F4818EB01C1007E9A43 /* SANetworkTester-Prefix.pch */,
-				D5238F5918EB01C1007E9A43 /* SANetworkTesterTests */,
 			);
 			name = "Supporting Files";
 			path = SANetworkTester;
@@ -169,12 +169,20 @@
 			children = (
 				D5238F7D18EB07EA007E9A43 /* SANetworkTester.h */,
 				D5238F7E18EB07EA007E9A43 /* SANetworkTester.m */,
+				D58A395A1A9BF39A00BA6D58 /* support */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D58A395A1A9BF39A00BA6D58 /* support */ = {
+			isa = PBXGroup;
+			children = (
 				D51EC5B218EB78DF0063AB2F /* Reachability.h */,
 				D51EC5B318EB78DF0063AB2F /* Reachability.m */,
 				D5238F7F18EB07EA007E9A43 /* SimplePing.h */,
 				D5238F8018EB07EA007E9A43 /* SimplePing.m */,
 			);
-			path = Source;
+			name = support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-
-
 /**
  *  Block for Completion which returns responses
  *
@@ -87,6 +84,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 @property (nonatomic) NSInteger response;
 
 
+#pragma mark -
 #pragma mark - SANetworkTester with Delegate
 /**
  *  checks for dns responses with supplied address
@@ -112,6 +110,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 + (id)appleWithDelegate:(id)delegate;
 
 
+#pragma mark -
 #pragma mark - SANetworkTester with Block
 /**
  *  use own address to ping a network
@@ -139,6 +138,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 + (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler;
 
 
+#pragma mark -
 #pragma mark - SANetworkTester network information
 /**
  *  Check device for action network connection such as Wifi and Data.
