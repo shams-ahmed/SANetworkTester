@@ -58,3 +58,7 @@ shams-ahmed, shamsahmed@me.com
 
 SANetworkTester is available under the MIT license. See the LICENSE file for more info.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/shams-ahmed/sanetworktester/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
