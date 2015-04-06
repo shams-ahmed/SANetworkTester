@@ -12,6 +12,7 @@
 
 #pragma mark
 #pragma mark - AppDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     /* 1. Active Network test - i.e wifi or data */
@@ -51,7 +52,9 @@
 }
 
 
+#pragma mark
 #pragma mark - SANetworkTesterDelegate
+
 - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error {
     [self showAlert:[NSString stringWithFormat:@"failed %@ wError: %@", address, error.localizedDescription]];
     
@@ -63,7 +66,9 @@
 }
 
 
+#pragma mark
 #pragma mark - Helper method for demo purpose only
+
 - (void)showAlert:(NSString *)message {
     [[[UIAlertView alloc] initWithTitle:@"SANetworkTester"
                                 message:message

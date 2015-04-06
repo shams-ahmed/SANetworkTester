@@ -35,6 +35,21 @@
     
 }
 
+- (void)testGooglePingWithTimeout {
+    __weak XCTestExpectation *expectation = [self expectationWithDescription:@"google ping test"];
+    
+    [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
+        [expectation fulfill];
+        
+    }  errorHandler:^(NSString *address, NSError *error) {
+        XCTFail();
+        
+    }];
+    
+    [self waitForExpectationsWithTimeout:100.0 handler:nil];
+    
+}
+
 - (void)testForApplePing {
     [SANetworkTester appleDNSWithCompletion:nil errorHandler:^(NSString *address, NSError *error) {
         XCTFail(@"SAN: could not ping apple");

@@ -12,12 +12,19 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
+#pragma mark -
+#pragma mark - Know IP Address for pinging
+
 static NSString *const SAGoogleDns = @"8.8.8.8";
 static NSString *const SAAppleAddess = @"www.apple.com";
+
 static NSInteger const SAAttemptLimit = 3;
 
 
 @interface SANetworkTester () <SimplePingDelegate>
+
+#pragma mark - 
+#pragma mark - Private
 
 /**
  *  does all actions fro mapple example
@@ -47,14 +54,15 @@ static NSInteger const SAAttemptLimit = 3;
 
 
 #pragma mark -
-#pragma mark - Class Method
+#pragma mark - Lifecycle
+
 - (void)dealloc {
-    [self.pinger stop];
-    [self.sendTimer invalidate];
+    [_pinger stop];
+    [_sendTimer invalidate];
     
 }
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     
     if (self) {
@@ -64,10 +72,11 @@ static NSInteger const SAAttemptLimit = 3;
     return self;
 }
 
-+ (id)initWithHost:(NSString *)hostName andDelegate:(id)delegate {
++ (instancetype)initWithHost:(NSString *)hostName andDelegate:(id)delegate {
     __block SANetworkTester *networkTester = [[SANetworkTester alloc] init];
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
+    {
         networkTester.pinger = [SimplePing simplePingWithHostName:hostName];
         networkTester.pinger.delegate = networkTester;
         networkTester.networkTesterDelegate = delegate;
@@ -84,18 +93,19 @@ static NSInteger const SAAttemptLimit = 3;
     return networkTester;
 }
 
-+ (id)googleDnsWithDelegate:(id)delegate {
++ (instancetype)googleDnsWithDelegate:(id)delegate {
     return [self initWithHost:SAGoogleDns andDelegate:delegate];
     
 }
 
-+ (id)appleWithDelegate:(id)delegate {
++ (instancetype)appleWithDelegate:(id)delegate {
     return [self initWithHost:SAAppleAddess andDelegate:delegate];
     
 }
 
 + (void)networkTestUsingBlockWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler address:(NSString *)address {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
+    {
         SANetworkTester *networkTester = [[SANetworkTester alloc] init];
         
         networkTester.pinger = [SimplePing simplePingWithHostName:address];
@@ -132,16 +142,12 @@ static NSInteger const SAAttemptLimit = 3;
     switch ([Reachability reachabilityForInternetConnection].currentReachabilityStatus) {
         case 0: // NotReachable
             return SANotReachable;
-            break;
         case 1: // ReachableViaWiFi
             return SAReachableViaWiFi;
-            break;
         case 2: // ReachableViaWWAN
             return SAReachableViaWWAN;
-            break;
         default:
             return SANotReachable;
-            break;
     }
     
 }

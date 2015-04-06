@@ -93,21 +93,21 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  *
  *  @return self
  */
-+ (id)initWithHost:(NSString *)hostName andDelegate:(id)delegate;
++ (instancetype)initWithHost:(NSString *)hostName andDelegate:(id)delegate;
 
 /**
  *  check with google public dns server
  *
  *  @return self
  */
-+ (id)googleDnsWithDelegate:(id)delegate;
++ (instancetype)googleDnsWithDelegate:(id)delegate;
 
 /**
  *  check with apple.com
  *
  *  @return self
  */
-+ (id)appleWithDelegate:(id)delegate;
++ (instancetype)appleWithDelegate:(id)delegate;
 
 
 #pragma mark -
