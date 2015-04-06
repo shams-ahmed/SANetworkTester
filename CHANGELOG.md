@@ -1,5 +1,8 @@
 # SANetworkTester CHANGELOG
 
+## 0.3.0
+unit test and minor code refactoring
+
 ## 0.2.2
 fixed bug reported by Slient
 

@@ -2,6 +2,7 @@
 
 [![Version](http://cocoapod-badges.herokuapp.com/v/SANetworkTester/badge.png)](http://cocoadocs.org/docsets/SANetworkTester)
 [![Platform](http://cocoapod-badges.herokuapp.com/p/SANetworkTester/badge.png)](http://cocoadocs.org/docsets/SANetworkTester)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/shams-ahmed/SANetworkTester/master/LICENSE)
 
 SANetworkHelper makes your life easier to test network connection on a iOS device without having to spend time writing lots of code. Its has a few simple class methods that run in a background thread and return the response of the network by either using Block or Delegate.
 
@@ -31,7 +32,14 @@ Example method with Delegate:
 
 To run the example project; clone the repo, and build the exmaple project.
 
-## Requirements
+## Communication
+
+- you need help, use Stack Overflow. (Tag 'SANetworkTester')
+- you'd like to ask a general question, use Stack Overflow.
+- you found a bug, and can provide steps to reliably reproduce it, open an issue.
+- you have a feature request, open an issue.
+- you want to contribute, submit a pull request.
+
 
 ## Installation
 
