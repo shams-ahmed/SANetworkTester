@@ -39,8 +39,8 @@ static NSInteger const SAAttemptLimit = 3;
 /**
  *  Block property
  */
-@property (copy) void (^completionHandler)();
-@property (copy) void (^errorHandler)();
+@property (nonatomic, copy) void (^completionHandler)();
+@property (nonatomic, copy) void (^errorHandler)();
 
 
 - (void)sendPing;
@@ -153,7 +153,9 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 
+#pragma mark -
 #pragma mark - Object Method
+
 - (NSString *)shortErrorFromError:(NSError *)error {
     NSString *result;
     NSNumber *failureNum;
@@ -199,13 +201,17 @@ static NSInteger const SAAttemptLimit = 3;
 - (void)stopPingWithError:(NSError *)error {
     __block NSError *aError = error;
     __block NSString *hostAddress = self.pinger.hostName;
+    __weak typeof(self) weakSelf = self;
     
     if (aError) {
         if ([self.networkTesterDelegate respondsToSelector:@selector(didFailToReceiveResponseFromAddress:withError:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.networkTesterDelegate performSelector:@selector(didFailToReceiveResponseFromAddress:withError:)
-                                              withObject:hostAddress
-                                              withObject:error];
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                __strong typeof(self) strongSelf = weakSelf;
+                
+                [strongSelf.networkTesterDelegate performSelector:@selector(didFailToReceiveResponseFromAddress:withError:)
+                                                       withObject:hostAddress
+                                                       withObject:error];
                 
             });
             
@@ -218,9 +224,12 @@ static NSInteger const SAAttemptLimit = 3;
         __block NSNumber *responses = [NSNumber numberWithInteger:_attempts];
         
         if ([self.networkTesterDelegate respondsToSelector:@selector(didReceiveNetworkResponse:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.networkTesterDelegate performSelector:@selector(didReceiveNetworkResponse:)
-                                                 withObject:responses];
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                __strong typeof(self) strongSelf = weakSelf;
+                
+                [strongSelf.networkTesterDelegate performSelector:@selector(didReceiveNetworkResponse:)
+                                                       withObject:responses];
                 
             });
 
@@ -241,7 +250,9 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 
+#pragma mark -
 #pragma mark - SinglePingDelegate
+
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address {
     [self sendPing];
     
