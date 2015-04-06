@@ -86,6 +86,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 
 #pragma mark -
 #pragma mark - SANetworkTester with Delegate
+
 /**
  *  checks for dns responses with supplied address
  *
@@ -112,6 +113,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 
 #pragma mark -
 #pragma mark - SANetworkTester with Block
+
 /**
  *  use own address to ping a network
  *
@@ -140,6 +142,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
 
 #pragma mark -
 #pragma mark - SANetworkTester network information
+
 /**
  *  Check device for action network connection such as Wifi and Data.
  *

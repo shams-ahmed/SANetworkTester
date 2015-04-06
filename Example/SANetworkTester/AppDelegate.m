@@ -14,7 +14,14 @@
 #pragma mark - AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+#ifdef DEBUG
+    BOOL isTestMode = [[self class] isTesting];
+    
+    if (isTestMode) {
+        return YES;
+    }    
+#endif
+    
     /* 1. Active Network test - i.e wifi or data */
     /*
     switch ([SANetworkTester networkStatus]) {
@@ -38,13 +45,17 @@
     
     
     /* 3. Ping test with Block approach*/
+    __weak typeof(self) weakSelf = self;
+    
     [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
-        // handle success
-        [self showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
         
     } errorHandler:^(NSString *address, NSError *error) {
-        // handle error
-        [self showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        [strongSelf showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
 
     }];
     
@@ -78,5 +89,10 @@
      show];
 }
 
++ (BOOL) isTesting
+{
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    return [environment objectForKey:@"TESTING"] != nil;
+}
 
 @end

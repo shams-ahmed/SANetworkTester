@@ -15,6 +15,10 @@
 
 @implementation SANetworkTesterTests
 
+#pragma mark -
+#pragma mark - Setup
+
+
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,58 +30,61 @@
 }
 
 
+#pragma mark -
 #pragma mark - Test cases for network ping
-- (void)testForGooglePing {
-    [SANetworkTester googleDNSWithCompletion:nil errorHandler:^(NSString *address, NSError *error) {
-        XCTFail(@"SAN: could not ping google");
-        
-    }];
-    
-}
 
-- (void)testGooglePingWithTimeout {
-    __weak XCTestExpectation *expectation = [self expectationWithDescription:@"google ping test"];
+- (void)testForGooglePing {
+    XCTestExpectation *expect = [self expectationWithDescription:@"async test 1"];
     
-    [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
-        [expectation fulfill];
-        
-    }  errorHandler:^(NSString *address, NSError *error) {
-        XCTFail();
-        
+    [SANetworkTester googleDNSWithCompletion:^(NSNumber *response)
+    {
+        [expect fulfill];
+    }
+                                errorHandler:^(NSString *address, NSError *error)
+    {
+        XCTFail(@"SAN: could not ping google");
     }];
     
-    [self waitForExpectationsWithTimeout:100.0 handler:nil];
-    
+    [self waitForExpectationsWithTimeout:15 handler:nil];
 }
 
 - (void)testForApplePing {
-    [SANetworkTester appleDNSWithCompletion:nil errorHandler:^(NSString *address, NSError *error) {
+    XCTestExpectation *expect = [self expectationWithDescription:@"async test 2"];
+    
+    [SANetworkTester appleDNSWithCompletion:^(NSNumber *response)
+    {
+        [expect fulfill];
+    }
+                               errorHandler:^(NSString *address, NSError *error)
+    {
         XCTFail(@"SAN: could not ping apple");
-        
     }];
     
-}
-
-- (void)testForPingForNilObject {
-    [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
-        XCTAssertNotNil(response, @"SAN: response is nil");
-    } errorHandler:^(NSString *address, NSError *error) {
-        XCTAssertNotNil(address, @"SAN: address ping has returned nil");
-        XCTAssertNotNil(error, @"SAN: could not geta error object");
-    }];
-    
+    [self waitForExpectationsWithTimeout:15 handler:nil];
 }
 
 - (void)testNumberOfResponses {
-    [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
-        XCTAssertEqual(response.intValue, [[SANetworkTester alloc] init].attempts, @"SAN: some pings were not received back from google dns");
+    XCTestExpectation *expect = [self expectationWithDescription:@"async test 3"];
+    
+    [SANetworkTester googleDNSWithCompletion:^(NSNumber *response)
+    {
+        [expect fulfill];
+        
+        XCTAssertEqual(response.intValue, 3, @"SAN: some pings were not received back from google dns");
     }
-                                errorHandler:nil];
-
+                                errorHandler:^(NSString *address, NSError *error)
+    {
+        XCTFail(@"SAN: did not match appempts");
+        
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:nil];
 }
 
 
+#pragma mark -
 #pragma mark - Test cases for network status
+
 - (void)testForActiveWifiNetwork {
     XCTAssertEqual([SANetworkTester networkStatus], SAReachableViaWiFi, @"SAN: network status is not wifi");
     

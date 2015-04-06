@@ -13,10 +13,11 @@
 #include <netdb.h>
 
 #pragma mark -
-#pragma mark - Know IP Address for pinging
+#pragma mark - Know IP Address for ping's
 
-static NSString *const SAGoogleDns = @"8.8.8.8";
-static NSString *const SAAppleAddess = @"www.apple.com";
+static NSString *const SAPingGoogleA = @"8.8.8.8";
+static NSString *const SAPingGoogleB = @"8.8.4.4";
+static NSString *const SAPingApple = @"www.apple.com";
 
 static NSInteger const SAAttemptLimit = 3;
 
@@ -43,11 +44,6 @@ static NSInteger const SAAttemptLimit = 3;
 @property (nonatomic, copy) void (^errorHandler)();
 
 
-- (void)sendPing;
-- (NSString *)shortErrorFromError:(NSError *)error;
-- (void)stopPingWithError:(NSError *)error;
-    
-    
 @end
 
 @implementation SANetworkTester
@@ -59,7 +55,8 @@ static NSInteger const SAAttemptLimit = 3;
 - (void)dealloc {
     [_pinger stop];
     [_sendTimer invalidate];
-    
+    _pinger = nil;
+    _sendTimer = nil;
 }
 
 - (instancetype)init {
@@ -72,6 +69,10 @@ static NSInteger const SAAttemptLimit = 3;
     return self;
 }
 
+
+#pragma mark -
+#pragma mark - Class Method
+
 + (instancetype)initWithHost:(NSString *)hostName andDelegate:(id)delegate {
     __block SANetworkTester *networkTester = [[SANetworkTester alloc] init];
 
@@ -80,6 +81,7 @@ static NSInteger const SAAttemptLimit = 3;
         networkTester.pinger = [SimplePing simplePingWithHostName:hostName];
         networkTester.pinger.delegate = networkTester;
         networkTester.networkTesterDelegate = delegate;
+        
         [networkTester.pinger start];
 
         do {
@@ -94,12 +96,12 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 + (instancetype)googleDnsWithDelegate:(id)delegate {
-    return [self initWithHost:SAGoogleDns andDelegate:delegate];
+    return [self initWithHost:SAPingGoogleA andDelegate:delegate];
     
 }
 
 + (instancetype)appleWithDelegate:(id)delegate {
-    return [self initWithHost:SAAppleAddess andDelegate:delegate];
+    return [self initWithHost:SAPingApple andDelegate:delegate];
     
 }
 
@@ -112,6 +114,7 @@ static NSInteger const SAAttemptLimit = 3;
         networkTester.pinger.delegate = networkTester;
         networkTester.completionHandler = completionHandler;
         networkTester.errorHandler = errorHandler;
+        
         [networkTester.pinger start];
         
         do {
@@ -127,14 +130,14 @@ static NSInteger const SAAttemptLimit = 3;
 + (void)googleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler {
     [self networkTestUsingBlockWithCompletion:completionHandler
                                  errorHandler:errorHandler
-                                      address:SAGoogleDns];
+                                      address:SAPingGoogleA];
     
 }
 
 + (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler {
     [self networkTestUsingBlockWithCompletion:completionHandler
                                  errorHandler:errorHandler
-                                      address:SAAppleAddess];
+                                      address:SAPingGoogleA];
     
 }
 
@@ -154,25 +157,31 @@ static NSInteger const SAAttemptLimit = 3;
 
 
 #pragma mark -
-#pragma mark - Object Method
+#pragma mark - Timer
+
+- (void)timerFireMethod:(NSTimer *)timer {
+    [self.pinger sendPingWithData:nil];
+}
+
+
+#pragma mark -
+#pragma mark - Error
 
 - (NSString *)shortErrorFromError:(NSError *)error {
     NSString *result;
-    NSNumber *failureNum;
-    int failure;
-    const char *failureStr;
-    result = nil;
+    NSNumber *failureKey;
+    const char *failedReason;
     
     // Handle DNS errors as a special case.
-    if ([error.domain isEqual:(NSString *)kCFErrorDomainCFNetwork] && (error.code == kCFHostErrorUnknown) ) {
-        failureNum = [error.userInfo objectForKey:(id)kCFGetAddrInfoFailureKey];
-        failure = failureNum.intValue;
+    if ([error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork] &&
+        (error.code == kCFHostErrorUnknown)) {
+        failureKey = [error.userInfo objectForKey:(id)kCFGetAddrInfoFailureKey];
         
-        if (failure != 0) {
-            failureStr = gai_strerror(failure);
-            if (failureStr != NULL) {
-                result = [NSString stringWithUTF8String:failureStr];
-                
+        if (failureKey.intValue != 0) {
+            failedReason = gai_strerror(failureKey.intValue);
+            
+            if (failedReason != NULL) {
+                result = [NSString stringWithUTF8String:failedReason];
             }
         }
     }
@@ -183,19 +192,10 @@ static NSInteger const SAAttemptLimit = 3;
     }
     
     if (!result) {
-        result = error.localizedDescription;
-    }
-    
-    if (!result) {
         result = error.description;
     }
     
     return result;
-}
-
-- (void)sendPing {
-    [self.pinger sendPingWithData:nil];
-    
 }
 
 - (void)stopPingWithError:(NSError *)error {
@@ -203,6 +203,18 @@ static NSInteger const SAAttemptLimit = 3;
     __block NSString *hostAddress = self.pinger.hostName;
     __weak typeof(self) weakSelf = self;
     
+    
+    /**
+     *  dealloc all objects and kill timer
+     */
+    [self.pinger stop];
+    [self.sendTimer invalidate];
+    self.sendTimer = nil;
+    self.pinger = nil;
+    
+    /**
+     *  send result
+     */
     if (aError) {
         if ([self.networkTesterDelegate respondsToSelector:@selector(didFailToReceiveResponseFromAddress:withError:)]) {
             dispatch_async(dispatch_get_main_queue(), ^
@@ -240,13 +252,6 @@ static NSInteger const SAAttemptLimit = 3;
         
     }
     
-    /**
-     *  dealloc all objects and kill timer
-     */
-    [self.sendTimer invalidate];
-    self.sendTimer = nil;
-    self.pinger = nil;
-    
 }
 
 
@@ -254,22 +259,22 @@ static NSInteger const SAAttemptLimit = 3;
 #pragma mark - SinglePingDelegate
 
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address {
-    [self sendPing];
-    
     /**
      *  start timer to make addional request
      */
     self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.75
                                                       target:self
-                                                    selector:@selector(sendPing)
+                                                    selector:@selector(timerFireMethod:)
                                                     userInfo:nil
                                                      repeats:YES];
+    
+    [self.sendTimer fire];
     
 }
 
 - (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet {
     if (_attempts == SAAttemptLimit) {
-        _response > 0 ? [self stopPingWithError:nil] : [self stopPingWithError:[NSError errorWithDomain:@"ReceiveUnexpectedPacket"
+        _response > 0 ? [self stopPingWithError:nil] : [self stopPingWithError:[NSError errorWithDomain:@"SAN: Receive unexpected packet"
                                                                                                    code:1000
                                                                                                userInfo:nil]];
         
@@ -277,6 +282,8 @@ static NSInteger const SAAttemptLimit = 3;
     } else if (_attempts < SAAttemptLimit) {
         _attempts++;
 
+    } else {
+        return;
     }
 
 }
@@ -305,10 +312,9 @@ static NSInteger const SAAttemptLimit = 3;
 }
 
 - (void)simplePing:(SimplePing *)pinger didReceiveUnexpectedPacket:(NSData *)packet {
-    [self stopPingWithError:[NSError errorWithDomain:@"ReceiveUnexpectedPacket"
+    [self stopPingWithError:[NSError errorWithDomain:@"SAN: Received unexpected packet"
                                                 code:1000
                                             userInfo:nil]];
-    
 }
 
 
