@@ -15,9 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #ifdef DEBUG
-    BOOL isTestMode = [[self class] isTesting];
-    
-    if (isTestMode) {
+    if ([[self class] isTesting]) {
         return YES;
     }    
 #endif
@@ -39,10 +37,8 @@
     }
     */
     
-    
     /* 2. Ping test with Delegate approach*/
     // [SANetworkTester googleDnsWithDelegate:self];
-    
     
     /* 3. Ping test with Block approach*/
     __weak typeof(self) weakSelf = self;
@@ -51,47 +47,46 @@
         __strong typeof(self) strongSelf = weakSelf;
         
         [strongSelf showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
-        
     } errorHandler:^(NSString *address, NSError *error) {
         __strong typeof(self) strongSelf = weakSelf;
         
         [strongSelf showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
-
     }];
     
     return YES;
 }
-
 
 #pragma mark
 #pragma mark - SANetworkTesterDelegate
 
 - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error {
     [self showAlert:[NSString stringWithFormat:@"failed %@ wError: %@", address, error.localizedDescription]];
-    
 }
 
 - (void)didReceiveNetworkResponse:(NSNumber *)response {
     [self showAlert:[NSString stringWithFormat:@"received %@ packets", response]];
-    
 }
-
 
 #pragma mark
 #pragma mark - Helper method for demo purpose only
 
 - (void)showAlert:(NSString *)message {
-    [[[UIAlertView alloc] initWithTitle:@"SANetworkTester"
-                                message:message
-                               delegate:nil
-                      cancelButtonTitle:@"Ok"
-                      otherButtonTitles:nil]
-     show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[UIAlertView alloc] initWithTitle:@"SANetworkTester"
+                                    message:message
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles:nil]
+         show];
+    });
 }
 
-+ (BOOL) isTesting
-{
+#pragma mark
+#pragma mark - Test Helper
+
++ (BOOL)isTesting {
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    
     return [environment objectForKey:@"TESTING"] != nil;
 }
 

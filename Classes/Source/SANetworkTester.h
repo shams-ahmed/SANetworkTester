@@ -6,7 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /**
  *  Block for Completion which returns responses
@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
     SAReachableViaWWAN
 };
 
-
 /**
  *  Protocol for response/fail of network ping test
  */
@@ -62,9 +61,7 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  */
 - (void)didReceiveNetworkResponse:(NSNumber *)response;
 
-
 @end
-
 
 @interface SANetworkTester : NSObject
 
@@ -82,7 +79,6 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  *  number of successful responses made
  */
 @property (nonatomic) NSInteger response;
-
 
 #pragma mark -
 #pragma mark - SANetworkTester with Delegate
@@ -109,7 +105,6 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  *  @return self
  */
 + (instancetype)appleWithDelegate:(id)delegate;
-
 
 #pragma mark -
 #pragma mark - SANetworkTester with Block
@@ -139,7 +134,6 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  */
 + (void)appleDNSWithCompletion:(SACompletionHandler)completionHandler errorHandler:(SAErrorHandler)errorHandler;
 
-
 #pragma mark -
 #pragma mark - SANetworkTester network information
 
@@ -149,6 +143,5 @@ typedef NS_ENUM(NSInteger, SACurrentNetworkStatus) {
  *  @return current status
  */
 + (SACurrentNetworkStatus)networkStatus;
-
 
 @end

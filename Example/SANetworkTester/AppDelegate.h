@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 SA. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
 #import "SANetworkTester.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, SANetworkTesterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
