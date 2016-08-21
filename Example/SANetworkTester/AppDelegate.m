@@ -20,8 +20,22 @@
     }    
 #endif
     
-    /* 1. Active Network test - i.e wifi or data */
-    /*
+    [self exampleGetActiveNetworkStatus];
+
+    // Example 1
+    [self exampleGoogleDNSUsingDelegate];
+
+    // Example 2
+//    [self exampleGoogleDNSUsingBlock];
+    
+    return YES;
+}
+
+#pragma mark
+#pragma mark - SANetworkTester
+
+///  Active network test - i.e WIFI or DATA status
+- (void)exampleGetActiveNetworkStatus {
     switch ([SANetworkTester networkStatus]) {
         case SANotReachable:
             [self showAlert:@"Network is not reachable via WIFI, DATA or WWAN"];
@@ -35,12 +49,15 @@
         default:
             break;
     }
-    */
-    
-    /* 2. Ping test with Delegate approach*/
-    // [SANetworkTester googleDnsWithDelegate:self];
-    
-    /* 3. Ping test with Block approach*/
+}
+
+///  Ping test with Delegate approach
+- (void)exampleGoogleDNSUsingDelegate {
+    [SANetworkTester googleDnsWithDelegate:self];
+}
+
+///  Ping test with Block approach
+- (void)exampleGoogleDNSUsingBlock {
     __weak typeof(self) weakSelf = self;
     
     [SANetworkTester googleDNSWithCompletion:^(NSNumber *response) {
@@ -52,27 +69,25 @@
         
         [strongSelf showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
     }];
-    
-    return YES;
 }
 
 #pragma mark
 #pragma mark - SANetworkTesterDelegate
 
 - (void)didFailToReceiveResponseFromAddress:(NSString *)address withError:(NSError *)error {
-    [self showAlert:[NSString stringWithFormat:@"failed %@ wError: %@", address, error.localizedDescription]];
+    [self showAlert:[NSString stringWithFormat:@"Failed %@ wError: %@", address, error.localizedDescription]];
 }
 
 - (void)didReceiveNetworkResponse:(NSNumber *)response {
-    [self showAlert:[NSString stringWithFormat:@"received %@ packets", response]];
+    [self showAlert:[NSString stringWithFormat:@"Received %@ packets", response]];
 }
 
 #pragma mark
-#pragma mark - Helper method for demo purpose only
+#pragma mark - Private - Helper for demo purpose only
 
 - (void)showAlert:(NSString *)message {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[[UIAlertView alloc] initWithTitle:@"SANetworkTester"
+        [[[UIAlertView alloc] initWithTitle:@"SANetworkTester feedback"
                                     message:message
                                    delegate:nil
                           cancelButtonTitle:@"Ok"
@@ -82,12 +97,12 @@
 }
 
 #pragma mark
-#pragma mark - Test Helper
+#pragma mark - Private - Test Helper
 
 + (BOOL)isTesting {
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    NSDictionary *environment = [NSProcessInfo processInfo].environment;
     
-    return [environment objectForKey:@"TESTING"] != nil;
+    return environment[@"TESTING"] != nil;
 }
 
 @end

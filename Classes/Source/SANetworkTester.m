@@ -157,13 +157,13 @@ static NSInteger const SAAttemptLimit = 3;
     // Handle DNS errors as a special case.
     if ([error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork] &&
         (error.code == kCFHostErrorUnknown)) {
-        failureKey = [error.userInfo objectForKey:(id)kCFGetAddrInfoFailureKey];
+        failureKey = (error.userInfo)[(id)kCFGetAddrInfoFailureKey];
         
         if (failureKey.intValue != 0) {
             failedReason = gai_strerror(failureKey.intValue);
             
             if (failedReason != NULL) {
-                result = [NSString stringWithUTF8String:failedReason];
+                result = @(failedReason);
             }
         }
     }
@@ -211,7 +211,7 @@ static NSInteger const SAAttemptLimit = 3;
             self.errorHandler(hostAddress, error);
         }
     } else {
-        __block NSNumber *responses = [NSNumber numberWithInteger:_attempts];
+        __block NSNumber *responses = @(_attempts);
         
         if ([self.networkTesterDelegate respondsToSelector:@selector(didReceiveNetworkResponse:)]) {
             dispatch_async(dispatch_get_main_queue(), ^
